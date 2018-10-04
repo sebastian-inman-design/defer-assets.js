@@ -5,8 +5,6 @@
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-"use strict";
-
 const DeferAssets = () => {
   let stylesArray = [];
   let scriptsArray = [];
@@ -82,4 +80,10 @@ const DeferAssets = () => {
   return FindAssets();
 };
 
-DeferAssets();
+/* Attempt to access the animationFrame function. */
+let AnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+/* Load the deferrred assets either on the first animation frame or page load. */
+if(AnimationFrame) AnimationFrame(() => { window.setTimeout(DeferAssets, 0); });
+else window.addEventListener('load', DeferAssets);

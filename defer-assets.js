@@ -86,4 +86,4 @@ window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
 /* Load the deferrred assets either on the first animation frame or page load. */
 if(AnimationFrame) AnimationFrame(() => { window.setTimeout(DeferAssets, 0); });
-else window.addEventListener('load', DeferAssets);
+else window.addEventListener("load", DeferAssets);
